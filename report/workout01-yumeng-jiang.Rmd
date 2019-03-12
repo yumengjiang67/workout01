@@ -1,0 +1,50 @@
+---
+title: "workout01-yumeng-jiang"
+author: "christine"
+date: "2019年3月3日"
+output: github_document
+---
+
+
+
+
+
+
+
+
+```{r}
+
+library(dplyr)
+shots_data <- read.csv("../data/shots-data.csv",stringsAsFactors = FALSE)
+#Effective Shooting % by Player: Overall (i.e. including 2PT and 3PT Field Goals) effective shooting percentage by player, arranged in descending order by percentage
+
+ summarize(group_by(shots_data,name),total=length(name),made=sum(shot_made_flag=="shot_yes"),perc_made=made/total)
+```
+
+
+
+
+
+
+```{r}
+#2PT Effective Shooting % by Player: 2 PT Field Goal effective shooting percentage by player, arranged in descending order by percentage.
+pt2 <- filter(shots_data,shot_type=="2PT Field Goal")
+summarize(group_by(pt2,name),total=length(name),made=sum(shot_made_flag=="shot_yes"),perc_made=made/total)
+
+
+```
+
+
+
+```{r}
+#3PT Effective Shooting % by Player: 3 PT Field Goal effective shooting percentage by player, arranged in descending order by percentage
+pt3 <- filter(shots_data,shot_type=="3PT Field Goal")
+summarize(group_by(pt3,name),total=length(name),made=sum(shot_made_flag=="shot_yes"),perc_made=made/total)
+```
+
+
+
+```{r out.width='80%',echo=FALSE,fig.align='center'}
+knitr::include_graphics("gsw_shot_charts")
+```
+
